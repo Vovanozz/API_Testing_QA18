@@ -1,9 +1,7 @@
 package okhttptests;
 
 import com.google.gson.Gson;
-import dto.AuthRequestDTO;
-import dto.AuthResponseDTO;
-import dto.ErrorDTO;
+import dto.*;
 import okhttp3.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -35,7 +33,7 @@ public class OkHTTPRegistrationTest {
         if(response.isSuccessful()){
             String responseJson=response.body().string();
             AuthResponseDTO responseDTO=gson.fromJson(responseJson,AuthResponseDTO.class);
-            System.out.println(responseDTO.getToken());
+            System.out.println("Registration Success Token is: "+responseDTO.getToken());
             System.out.println(response.code());
             Assert.assertTrue(response.isSuccessful());
         }else {
@@ -44,4 +42,5 @@ public class OkHTTPRegistrationTest {
             System.out.println(errorDTO.getStatus()+" ==== "+errorDTO.getMessage()+"======="+errorDTO.getError());
             Assert.assertFalse(response.isSuccessful());
     }
+
 }}
